@@ -1,0 +1,742 @@
+@import url("reset.css");
+@import url("common.css");
+html,body{
+	width: 100%;
+	height: 100%;
+}
+/*#canvas{
+	position: absolute;
+	width: 80%;
+	height: 60%;
+	background: red;
+	left: 10%;
+	top: 20%;
+}*/
+body{
+	font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif;
+	overflow: hidden;
+}
+
+.act{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: #faeedd no-repeat center center;
+	background-size: cover;
+	overflow: hidden;
+}
+.welcome{
+	background-image: url(https://s4.wandougongzhu.cn/s/69/bg_adf64f.jpg);
+
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.welcome .part1{
+	flex: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.welcome .part2{
+	height: 19%;
+	text-align: center;
+}
+.welcome-title{
+	max-width: 5.42rem;
+	max-height: 8.24rem;
+}
+.welcome-btn{
+	display: none;
+	width: 4.72rem;
+	height: 1.07rem;
+	border: none;
+	background: url(https://s3.wandougongzhu.cn/s/90/btn_7cf7a6.png) center center no-repeat;
+	background-size: 100% 100%;
+}
+
+.draw, .omamori{
+	display: none;
+}
+
+.draw{
+	background-image: url(https://s4.wandougongzhu.cn/s/69/bg_adf64f.jpg);
+}
+
+@keyframes tada {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%, 20% {
+    transform: scale3d(.8, .8, .8) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%, 60%, 80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.tada {
+  animation-name: tada;
+}
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+.scroll-mini{
+	width: 4.01rem;
+	height: 5.53rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -2rem;
+	margin-top: -2.76rem;
+	background: url(https://s.wandougongzhu.cn/s/4c/scroll-mini_c1c0aa.png);
+	background-size: 100% 100%;
+	visibility: hidden;
+}
+.scroll-mini-paper{
+	position: absolute;
+	width: 2.8rem;
+	height: 4.8rem;
+	left: 0.6rem;
+	top: 0.3rem;
+}
+.scroll-mask{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0, 0.6);
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+.scroll-mask-hide{
+	opacity: 0;
+}
+.scroll-box{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 7.28rem;
+	height: 1.2rem;
+	transform: translate3d(-50%,-50%,0);
+}
+.scroll-open{
+	animation: scroll_open 1s ease both;
+}
+@keyframes scroll_open {
+  0% {
+    height: 1.2rem;
+  }
+  100% {
+  	height: 10rem;
+  }
+}
+.scroll-collapse{
+	animation: scroll_collapse 1s ease both;
+}
+@keyframes scroll_collapse {
+  0% {
+    height: 10rem;
+  }
+  60% {
+  	height: 1.2rem;
+  	transform: translate3d(-50%,-50%,0);;
+  }
+  100%{
+  	transform: translate3d(-200%, 0, 0);
+  }
+}
+.scroll-bar-top,.scroll-bar-bottom{
+	width: 7.28rem;
+	height: 0.92rem;
+	position: absolute;
+	left: 0;
+	z-index: 2;
+}
+.scroll-bar-top{
+	top:0;
+}
+.scroll-bar-bottom{
+	bottom: 0;
+}
+.scroll-body{
+	position: absolute;
+	width: 6.16rem;
+	left: 0.56rem;
+	top: 0.4rem;
+	bottom: 0.4rem;
+	z-index: 1;
+
+	background: url(https://s3.wandougongzhu.cn/s/1c/scroll-bg_243c70.jpg) center center no-repeat;
+	background-size: 6.16rem 10.54rem;
+	overflow: hidden;
+}
+.scroll-content{
+	position: absolute;
+	width: 5.25rem;
+	height: 9rem;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-2.62rem, -4.5rem, 0);
+
+	text-align: center;
+	font-size: 0.26rem;
+	color: #000;
+}
+#canvas{
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+
+	transition: 
+		left   0.5s ease-in,
+		top    0.5s ease-in,
+		width  0.5s ease-in,
+		height 0.5s ease-in;
+}
+.scroll-content img{
+	margin-top: 0.7rem;
+	width: 4.32rem;
+	height: 3.67rem;
+}
+.scroll-content h3{
+	font-size: 0.26rem;
+	padding: 0.5rem 0 0.1rem;
+}
+.scroll-content ul{
+	text-align: center;
+	font-size: 0.36rem;
+	line-height: 0.48rem;
+	padding-top: 0.5rem;
+	opacity: 0.2;
+	text-shadow: 1px 1px 3px rgba(221,188,109,.8)
+}
+.scroll-content button{
+	margin-top: 0.4rem;
+	width: 2.5rem;
+	height: 0.6rem;
+	font-size: 0.32rem;
+	color: #fff;
+  background-color: #e94045;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+.breathe-anim{
+	animation-timing-function: ease-in-out;
+	animation-name: breathe;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes breathe {
+  0% {
+  	opacity: 0;
+  }
+  100% {
+  	opacity: 1; 
+ 	}
+}
+.breathe-btn-anim{
+	animation-timing-function: ease-in-out;
+	animation-name: breathe_btn;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes breathe_btn {
+  0% {
+  	opacity: .8;
+  	box-shadow:0 0px 5px 0 rgba(221,188,109,0.1);
+  }
+  100% {
+  	opacity: 1;
+  	box-shadow:0 0px 30px 3px rgba(221,188,109,1);
+  }
+}
+
+
+.typewriter{
+	font-size: 0.36rem;
+}
+.typewriter span{
+	position: absolute;
+	opacity: 0;
+	animation: typewriter 0.2s ease-in;
+	animation-fill-mode: both;
+}
+
+@keyframes typewriter {
+  0% {
+    transform: translate3d(3rem, -2rem, 0) scale(2);
+    opacity: 0;
+  }
+  100%{
+  	transform: translate3d(0, 0, 0) scale(1);
+  	opacity: 1;
+  }
+}
+
+.focus-box{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	width: 2rem;
+	height: 2rem;
+	opacity: 0;
+	transition: 
+		width   .5s  ease 0.8s,
+		height  0.5s ease 0.8s,
+		opacity 0.5s ease 0.8s;
+}
+.focus-box-show{
+	width: 6.12rem;
+	height: 6.12rem;
+	opacity: 1;
+}
+.focus-box div{
+	position: absolute;
+	width: 0.35rem;
+	height: 0.35rem;
+	border: solid #fff;
+}
+.focus-box div:nth-of-type(1){
+	top: 0;
+	left: 0;
+	border-width: 0.04rem 0 0 0.04rem;
+}
+.focus-box div:nth-of-type(2){
+	top: 0;
+	right: 0;
+	border-width: 0.04rem 0.04rem 0 0;
+}
+.focus-box div:nth-of-type(3){
+	bottom: 0;
+	right: 0;
+	border-width: 0 0.04rem 0.04rem 0;
+}
+.focus-box div:nth-of-type(4){
+	bottom: 0;
+	left: 0;
+	border-width: 0 0 0.04rem 0.04rem;
+}
+#demoCanvas{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9;
+	display: none;
+	pointer-events: none;
+}
+.hand{
+	pointer-events: none;
+	z-index: 10;
+	position: absolute;
+	left: 150%;
+	top: 150%;
+	width: 3.48rem;
+	height: 5.02rem;
+	background: url(https://s2.wandougongzhu.cn/s/6a/hand_d3e71d.png);
+	background-size: 100% 100%;
+}
+.hand-ease{
+	transition: left 1s ease, top 1s ease;
+}
+.omamori-open{
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	text-align: center;
+	width: 4.63rem;
+	height: 5.9rem;
+	margin-left: -2.3rem;
+	margin-top: -2.9rem;
+}
+.omamori-open img{
+	width: 4.63rem;
+	height: 5.27rem;
+}
+.omamori{
+	background-image: url(https://m.wandougongzhu.cn/resource/img/activity/omamori/simple4.jpg);
+}
+.omamori-card{
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -3.33rem;
+	width: 6.66rem;
+	height: 11.53rem;
+	background: center center no-repeat;
+	background-size: 100% 100%;
+}
+.omamori-title{
+	position: absolute;
+	left: 1.35rem;
+	top: 2.75rem;
+	width: 4rem;
+	height: 1rem;
+}
+.omamori-text-box{
+	position: absolute;
+	left: 1.1rem;
+	top: 3.9rem;
+	width: 4.5rem;
+	height: 4.5rem;
+	writing-mode: vertical-rl;
+
+	font-size: 0.34rem;
+	line-height: 0.7rem;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.omamori-text{
+	height: 3.8rem;
+	background: url(https://s.wandougongzhu.cn/s/d7/underline2_d23fef.gif) top left repeat;
+	background-size: 0.7rem 0.1rem;
+	text-align: justify;
+}
+.omamori-text span{
+	margin: 0.02rem 0;
+}
+.first{
+	display: none;
+}
+.second{
+	display: none;
+}
+.wx{
+	display: none;
+}
+.first-mod .first{
+	display: block;
+}
+.second-mod .second{
+	display: block;
+}
+.wx-mod .wx{
+	display: block;
+}
+.tips{
+	position: absolute;
+	top: 8.6rem;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 0.24rem;
+	color: #e94045;
+	line-height: 0.35rem;
+}
+.share-btn{
+	position: absolute;
+	left: 50%;
+	margin-left: -1.25rem;
+	bottom: 1.4rem;
+	width: 2.5rem;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	text-align: center;
+	font-size: 0.32rem;
+	color: #fff;
+  background-color: #e94045;
+  border: none;
+  border-radius: 0.3rem;
+}
+.second .share-btn,
+.wx .share-btn{
+	bottom: 1.9rem;
+}
+.second .try-again-btn,
+.wx .try-again-btn{
+	position: absolute;
+	left: 50%;
+	margin-left: -1.25rem;
+	bottom: 1.1rem;
+}
+.get-award-btn{
+	position: absolute;
+	left: 50%;
+	margin-left: -1.25rem;
+	bottom: 1.4rem;
+}
+
+.wd-right{
+	width: 1.96rem;
+	height: 0.66rem;
+	position: absolute;
+	left: 50%;
+	margin-left: -0.98rem;
+	bottom: 0.2rem;
+	background: url(https://s5.wandougongzhu.cn/s/c2/right_4fd158.png);
+	background-size: 100% 100%;
+}
+
+
+.canvas-text-box{
+	position: absolute;
+	z-index: 11;
+	left: -1000px;
+	top: 0;
+	width: 450px;
+	height: 450px;
+	writing-mode: vertical-rl;
+
+	font-size: 34px;
+	line-height: 70px;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.canvas-text{
+	height: 380px;
+	background: url(https://s.wandougongzhu.cn/s/d7/underline2_d23fef.gif) top right repeat;
+	background-size: 70px 10px;
+	text-align: justify;
+}
+.canvas-text span{
+	margin: 2px 0;
+}
+
+.award{
+	display: none;
+}
+.award-mask{
+	background-color: #000;
+	opacity: 0.6;
+	position: absolute;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	z-index: 9;
+}
+.award-box{
+	z-index: 10;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 0.12rem;
+	background: url(https://s4.wandougongzhu.cn/s/d7/pop-bg_e1fcba.jpg) center center repeat;
+	background-size: 1.83rem 3.6rem;
+	border-radius: 0.3rem;
+}
+.award-content{
+	width: 5.8rem;
+	min-height: 5rem;
+	background-color: #fff;
+	border-radius: 0.3rem;
+}
+.close-btn{
+	background: url(https://s5.wandougongzhu.cn/s/6a/close-btn_f5bcbc.png) center center no-repeat;
+	background-size: 100% 100%;
+	width: 0.46rem;
+	height: 0.64rem;
+	position: absolute;
+	top: -0.64rem;
+	right: 0.3rem;
+}
+.award-title{
+	color: #e94045;
+	font-size: 0.42rem;
+	font-weight: bold;
+	padding-top: 0.2rem;
+	line-height: 1rem;
+	text-align: center;
+}
+.award-body{
+	display: none;
+}
+.award-coupon{
+	text-align: center;
+}
+.award-coupon-body{
+	width: 5.02rem;
+	height: 1.88rem;
+	margin: 0 auto;
+	background: url(https://s3.wandougongzhu.cn/s/51/coupon_8a461e.png) no-repeat;
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.award-coupon-title,
+.award-coupon-subtitle{
+	flex: 1;
+	color: #fff;
+}
+.award-coupon-title{
+	text-align: right;
+	padding-right: 0.3rem;
+	font-size: 1rem;
+	line-height: 1.2rem;
+}
+.award-coupon-title span{
+	font-size: 0.5rem;
+}
+.award-coupon-subtitle{
+	text-align: left;
+	border-left: 1px solid #fff;
+	font-size: 0.3rem;
+	line-height: 0.4rem;
+	padding-left: 0.3rem;
+}
+.award-coupon .btn{
+	margin: 0.5rem 0;
+}
+.btn{
+	width: 2.5rem;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	font-size: 0.32rem;
+	color: #fff;
+  background-color: #e94045;
+  border: none;
+  border-radius: 0.3rem;
+  display: inline-block;
+}
+
+.award-omamori-coupon{
+	text-align: center;
+	font-size: 0.24rem;
+	line-height: 0.4rem;
+	padding-bottom: 0.3rem;
+}
+.award-omamori-coupon img{
+	width: 4.76rem;
+	height: 1.94rem;
+}
+.award-omamori-coupon .desc{
+	width: 5rem;
+	margin: 0 auto;
+	padding: 0.3rem;
+}
+.award-omamori-coupon strong{
+	font-size: 0.26rem;
+}
+
+.award-goods{
+	text-align: center;
+}
+.award-goods img{
+	width: 4.27rem;
+	height: 1.9rem;
+}
+.award-goods .screen-tips-bar {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	background: #ddbc6d;
+	padding: 0 0.32rem;
+	height: 0.46rem;
+	line-height: 0.46rem;
+	color: #fff;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 0.26rem;
+	width: 3rem;
+}
+
+.award-goods .screen-tips-bar:before {
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 0;
+	top: 0;
+	content: "";
+	border-top: 0.23rem solid transparent;
+	border-left: 0.1rem solid #fff;
+	border-bottom: 0.23rem solid transparent;
+}
+
+.award-goods .screen-tips-bar:after {
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: 0;
+	top: 0;
+	content: "";
+	border-top: 0.23rem solid transparent;
+	border-right: 0.1rem solid #fff;
+	border-bottom: 0.23rem solid transparent;
+}
+.award-goods .btn{
+	margin: 0.5rem 0;
+}
+
+.award-money{
+	text-align: center;
+	font-size: 0.26rem;
+	padding-bottom: 0.3rem;
+	font-weight: bold;
+}
+.award-money img{
+	width: 3.12rem;
+}
+.award-omamori{
+	text-align: center;
+	font-size: 0.26rem;
+	padding-bottom: 0.3rem;
+	font-weight: bold;
+}
+.award-omamori img{
+	width: 2.63rem;
+	height: 2.66rem;
+}
+.award-omamori div{
+	margin: 0 auto;
+	width: 3.5rem;
+	padding: 0.3rem 0;
+}
+.award-get{
+	text-align: center;
+}
+.award-get img{
+	width: 3.51rem;
+	height: 1.98rem;
+}
+.award-done{
+	text-align: center;
+}
+.award-done img{
+	width: 1.36rem;
+	height: 2.6rem;
+	margin-bottom: 0.2rem;
+}
+
+
+.bang{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 11;
+	pointer-events: none;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>wandouer_works</title>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="title">Wandouer Works</div>
+        <div class="desc">豌豆公主前端作品库</div>
+    </div>
+</header>
+<nav>
+    <div class="cut-off container">
+    </div>
+    <ul>
+        <li><a href="">活动</a></li>
+        <li><a href="">组件</a></li>
+        <li><a href="">仿站</a></li>
+        <li><a href="">博客</a></li>
+        <li><a href="">其他</a></li>
+    </ul>
+    <div class="cut-off container"></div>
+</nav>
+<div class="container con-box">
+    <div class="demo">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="resource">上传文件</label>
+            <input type="file" id="resource" name="resource">
+            <div class="flie-upload"></div>
+            <button type="submit">上传</button>
+        </form>
+    </div>
+    <!--<a href="/download/kkk">下载文件</a>-->
+    <div class="demo demo-exp hidden">
+        <div class="logo">
+            <a href="">
+                <div class="name hidden"></div>
+                <div class="desc hidden"></div>
+            </a>
+        </div>
+        <div class="detail-box">
+            <a class="author" href=""></a>
+            <a class="download" href="">下载</a>
+        </div>
+    </div>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url:'/worksInfo',
+            type:'get',
+            dataType: 'json',
+            success:function(data){
+                var pageArr = data.page_arr.toString().split(',')
+                var dataArr = data.data_arr;
+                for (var k in data.data_arr) {
+                    var exp = /^resource-.*[0-9]/
+                    var downFile = exp.exec(pageArr[k].replace("/works/", ""))
+                    var dataArrK = JSON.parse(dataArr[k]);
+                    $(".con-box").append($(".demo-exp").eq(0).clone().removeClass("hidden"));
+//                    $(".logo a").attr("href", pageArr[k] + '/index.html');
+                    $(".logo a").css("background-image", "url(" + dataArrK.logo +")");
+                    $(".logo .name").eq(k).html(dataArrK.name);
+                    $(".logo .desc").eq(k).html(dataArrK.description);
+                    $(".author").eq(k).html(dataArrK.author + '-' + dataArrK.name);
+                    $(".demo-exp a").attr("href",pageArr[k] + '/index.html');
+                    $("a.download").attr("href","/upload/" + downFile + ".zip");
+                }
+                $(".logo").hover(function () {
+                    $(this).find(".name").toggleClass("hidden");
+                    $(this).find(".desc").toggleClass("hidden");
+                })
+            }
+        });
+    })
+
+</script>
+</body>
+</html>
