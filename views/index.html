@@ -70,7 +70,7 @@
                     $(".logo .desc").eq(k).html(dataArrK.description);
                     $(".author").eq(k).html(dataArrK.author + '-' + dataArrK.name);
                     $(".demo-exp a").attr("href", './public' + pageArr[k] + '/index.html');
-                    $("a.download").attr("href", "./public/upload/" + downFile + ".zip");
+                    $("a.download").attr("href", "./upload/" + downFile + ".zip");
                 }
                 $(".logo").hover(function () {
                     $(this).find(".name").toggleClass("hidden");
