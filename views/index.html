@@ -51,7 +51,7 @@
 <script>
     $(document).ready(function(){
         $.ajax({
-            url:'/worksInfo',
+            url:'worksInfo',
             type:'get',
             dataType: 'json',
             success:function(data){
@@ -69,7 +69,7 @@
                     $(".logo .name").eq(k).html(dataArrK.name);
                     $(".logo .desc").eq(k).html(dataArrK.description);
                     $(".author").eq(k).html(dataArrK.author + '-' + dataArrK.name);
-                    $(".demo-exp a").attr("href", '.' + pageArr[k] + '/index.html');
+                    $(".demo-exp a").attr("href", './public' + pageArr[k] + '/index.html');
                     $("a.download").attr("href", "./public/upload/" + downFile + ".zip");
                 }
                 $(".logo").hover(function () {
