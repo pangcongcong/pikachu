@@ -36,8 +36,10 @@
     <div class="demo demo-exp hidden">
         <div class="logo">
             <a href="">
-                <div class="name hidden"></div>
-                <div class="desc hidden"></div>
+                <div class="exp-box">
+                    <div class="name hidden"></div>
+                    <div class="desc hidden"></div>
+                </div>
             </a>
         </div>
         <div class="detail-box">
@@ -57,20 +59,23 @@
             success:function(data){
                 var pageArr = data.page_arr.toString().split(',')
                 var dataArr = data.data_arr;
-                console.log(pageArr)
-                console.log(dataArr)
+
                 for (var k in data.data_arr) {
                     var exp = /^resource-.*[0-9]/
                     var downFile = exp.exec(pageArr[k].replace("/works/", ""))
                     var dataArrK = JSON.parse(dataArr[k]);
+                    console.log(dataArrK)
                     $(".con-box").append($(".demo-exp").eq(0).clone().removeClass("hidden"));
-//                    $(".logo a").attr("href", pageArr[k] + '/index.html');
-                    $(".logo a").css("background-image", "url(" + dataArrK.logo +")");
-                    $(".logo .name").eq(k).html(dataArrK.name);
-                    $(".logo .desc").eq(k).html(dataArrK.description);
-                    $(".author").eq(k).html(dataArrK.author + '-' + dataArrK.name);
-                    $(".demo-exp a").attr("href", '.' + pageArr[k] + '/index.html');
-                    $("a.download").attr("href", "./upload/" + downFile + ".zip");
+
+                    var $curDemo = $(".demo-exp").eq(k + 1);
+
+                    $curDemo.find(".logo a").css("background-image", "url(" + dataArrK.logo +")");
+                    $curDemo.find(".logo a").attr("href", '.' + pageArr[k] + '/index.html');
+                    $curDemo.find(".name").html(dataArrK.name);
+                    $curDemo.find(".desc").html(dataArrK.description);
+                    $curDemo.find(".author").html(dataArrK.author + '-' + dataArrK.name);
+                    $curDemo.find(".author").attr("href", '.' + pageArr[k] + '/index.html');
+                    $curDemo.find("a.download").attr("href", "./upload/" + downFile + ".zip");
                 }
                 $(".logo").hover(function () {
                     $(this).find(".name").toggleClass("hidden");
