@@ -58,6 +58,7 @@
                 var pageArr = data.page_arr.toString().split(',')
                 var dataArr = data.data_arr;
                 console.log(pageArr)
+                console.log(dataArr)
                 for (var k in data.data_arr) {
                     var exp = /^resource-.*[0-9]/
                     var downFile = exp.exec(pageArr[k].replace("/works/", ""))
@@ -68,8 +69,8 @@
                     $(".logo .name").eq(k).html(dataArrK.name);
                     $(".logo .desc").eq(k).html(dataArrK.description);
                     $(".author").eq(k).html(dataArrK.author + '-' + dataArrK.name);
-                    $(".demo-exp a").attr("href",pageArr[k] + '/index.html');
-                    $("a.download").attr("href", "public/upload/" + downFile + ".zip");
+                    $(".demo-exp a").attr("href", '.' + pageArr[k] + '/index.html');
+                    $("a.download").attr("href", "./public/upload/" + downFile + ".zip");
                 }
                 $(".logo").hover(function () {
                     $(this).find(".name").toggleClass("hidden");
