@@ -1,0 +1,64 @@
+html,body {
+	background: #fff;
+	width: 100%;
+	-webkit-text-size-adjust: none
+}
+body{
+	font: 14px/1.5 Helvetica,sans-serif;
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+	margin: 0;
+	padding: 0
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%
+}
+
+ul,ol,li {
+	list-style: none
+}
+
+em,i {
+	font-style: normal
+}
+
+img {
+	border: 0
+}
+
+input,img {
+	vertical-align: middle
+}
+
+body {
+	color: #000;
+	font-size: 14px;
+}
+
+a {
+	color: #000;
+	text-decoration: none
+}
+
+
+html,a {
+	-webkit-tap-highlight-color: transparent
+}
+
+.clearfix:after {
+	display: block;
+	content: '';
+	clear: both;
+	visibility: hidden
+}
+
+.hidden {
+	display: none
+}
