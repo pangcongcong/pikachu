@@ -26,14 +26,12 @@ router.get('/error', function(req, res) {
 });
 router.post('/upload', function (req, res) {
     upload(req, res, function (err) {
-        console.log(req.file);
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
         if (err) {
             console.log(req.body);   //打印请求体
             console.log(req.file);
-            // An error occurred when uploading
             return
         }
     })
