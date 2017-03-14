@@ -16,15 +16,15 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('./works', function(req, res) {
+router.get('/works', function(req, res) {
 //    var path = req.query.path;
     var path = req.query.path
     res.render('works/' + path + '/index');
 });
-router.get('./error', function(req, res) {
+router.get('/error', function(req, res) {
     res.render('error')
 });
-router.post('./upload', function (req, res) {
+router.post('/upload', function (req, res) {
     upload(req, res, function (err) {
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
@@ -37,7 +37,7 @@ router.post('./upload', function (req, res) {
     })
     res.send('success');
 })
-router.post('./download', function (req, res, next) {
+router.post('/download', function (req, res, next) {
     res.download(req.file.path);
 })
 var storage = multer.diskStorage({
@@ -67,7 +67,7 @@ function walk(path){
     });
 }
 
-router.get('./worksInfo', function(req, res, next) {
+router.get('/worksInfo', function(req, res, next) {
     var data = {};
     var data_arr = [];
     var page_arr = [];
