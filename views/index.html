@@ -71,7 +71,7 @@
 
                     var $curDemo = $(".demo-exp").eq(parseInt(k)+1);
 
-                    $curDemo.find(".logo a").css("background-image", "url(" + dataArrK.logo +")");
+                    $curDemo.find(".logo").css("background-image", "url(" + dataArrK.logo +")");
                     $curDemo.find(".logo a").attr("href", '.' + pageArr[k] + '/index.html');
                     $curDemo.find(".name").html(dataArrK.name);
                     $curDemo.find(".desc").html(dataArrK.description);
