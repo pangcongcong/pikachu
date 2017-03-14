@@ -25,10 +25,13 @@ router.get('/error', function(req, res) {
     res.render('error')
 });
 router.post('/upload', function (req, res) {
+        console.log(111)
     upload(req, res, function (err) {
+        console.log(222)
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
+        console.log(fileFormat)
         if (err) {
             console.log(req.body);   //打印请求体
             console.log(req.file);
@@ -68,6 +71,9 @@ function walk(path){
 }
 
 router.get('/worksInfo', function(req, res, next) {
+    pageList = [];
+    fileList = [];
+    walk('public/works')
     var data = {};
     var data_arr = [];
     var page_arr = [];

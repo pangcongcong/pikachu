@@ -27,7 +27,7 @@
 </nav>
 <div class="container con-box">
     <div class="demo">
-        <form action="/pikachu/upload" method="post" enctype="multipart/form-data">
+        <form action="upload" method="post" enctype="multipart/form-data">
             <label for="resource">点击上传文件</label>
             <input type="file" id="resource" name="resource">
             <div class="flie-upload"></div>
@@ -69,7 +69,7 @@
                     console.log(dataArrK)
                     $(".con-box").append($(".demo-exp").eq(0).clone().removeClass("hidden"));
 
-                    var $curDemo = $(".demo-exp").eq(k + 1);
+                    var $curDemo = $(".demo-exp").eq(parseInt(k)+1);
 
                     $curDemo.find(".logo a").css("background-image", "url(" + dataArrK.logo +")");
                     $curDemo.find(".logo a").attr("href", '.' + pageArr[k] + '/index.html');
