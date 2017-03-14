@@ -9,6 +9,19 @@ var router = express.Router();
 var fileList = [];
 var pageList = [];
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/upload')
+    },
+    filename: function (req, file, cb) {
+        var fileFormat =(file.originalname).split(".");
+        cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+    }
+});
+
+var upload = multer({ storage: storage }).single('resource');
+
+
 //var upload = multer({dest:"public/upload"}).single('resource');
 //  解压到views/works
 /* GET home page. */
@@ -24,34 +37,37 @@ router.get('/works', function(req, res) {
 router.get('/error', function(req, res) {
     res.render('error')
 });
-router.post('/upload', function (req, res) {
-        console.log(111)
-    upload(req, res, function (err) {
+//router.post('/upload', function (req, res) {
+//        console.log(111)
+//    upload(req, res, function (err) {
+//        console.log(222)
+//        var unzip = new adm_zip(req.file.path);
+//        var fileFormat =(req.file.filename).split(".");
+//        unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
+//        console.log(fileFormat)
+//        if (err) {
+//            console.log(req.body);   //打印请求体
+//            console.log(req.file);
+//            return
+//        }
+//    })
+//    res.send('success');
+//})
+
+router.post('/upload', upload,function (req, res) {
+//    upload(req, res, function (err) {
         console.log(222)
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
         console.log(fileFormat)
-        if (err) {
-            console.log(req.body);   //打印请求体
-            console.log(req.file);
-            return
-        }
-    })
+//    })
     res.send('success');
 })
 router.post('/download', function (req, res, next) {
     res.download(req.file.path);
 })
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/upload')
-    },
-    filename: function (req, file, cb) {
-        var fileFormat =(file.originalname).split(".");
-        cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
-    }
-});
+
 function walk(path){
     var dirList = fs.readdirSync(path);
     dirList.forEach(function(item){
@@ -90,8 +106,6 @@ router.get('/worksInfo', function(req, res, next) {
     data.page_arr = page_arr;
     res.send(data);
 });
-
-var upload = multer({ storage: storage }).single('resource');
 
 // walk('public/works');
 module.exports = router;

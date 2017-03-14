@@ -46,6 +46,7 @@ nav ul li {
   justify-content: center;
 }
 nav ul li:hover {
+    background-image: none;
   background: #ccc;
 }
 nav ul li a {
