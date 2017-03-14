@@ -1,0 +1,207 @@
+.act3-stage-show {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: act3fadeIn;
+}
+.act3-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url("https://s5.wandougongzhu.cn/s/96/act3_bg_bf9b75.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.act3-fadeout {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: act3fadeOut;
+}
+.act3-leaf {
+    /*display: none;*/
+    position: absolute;
+    width: 6.4rem;
+    height: 10.02rem;
+    left: 50%;
+    top: 50%;
+    margin: -4.47rem 0 0 -2.5rem;
+    transform: rotate(5deg) scale3d(1, 1, 1);
+}
+.act3-leaf>img {
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0;
+}
+.act3-leaf-drop {
+    animation-duration: 10s;
+    animation-name: act3Drop;
+    animation-direction: normal, normal;
+    animation-timing-function: ease-in;
+}
+.act3-leaf-shake {
+    animation-name: act3Shake;
+    animation-duration: 10s;
+    /*animation-iteration-count: infinite;*/
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    transform-origin: 50% -100%;
+}
+.act3-title {
+    position: absolute;
+    z-index: 3;
+    left: 0.7rem;
+    top: 1.4rem;
+    width: 4.8rem;
+    height: 3.13rem;
+    display: none;
+}
+.act3-title>div{
+    opacity: 0;
+    background: url(https://s2.wandougongzhu.cn/s/61/title_3_60522e.png) no-repeat;
+    background-size: 4.39rem 2.46rem;
+}
+.act3-title>div:nth-of-type(1){
+    background-position: 0 0;
+    height: 0.37rem;
+    animation-delay: 0;
+}
+.act3-title>div:nth-of-type(2){
+    background-position: 0 -0.37rem;
+    height: 0.49rem;
+    animation-delay: 0.2s;
+}
+.act3-title>div:nth-of-type(3){
+    background-position: 0 -0.85rem;
+    height: 0.5rem;
+    animation-delay: 0.4s;
+}
+.act3-title>div:nth-of-type(4){
+    background-position: 0 -1.35rem;
+    height: 0.63rem;
+    animation-delay: 0.6s;
+}
+.act3-title>div:nth-of-type(5){
+    background-position: 0 -2rem;
+    height: 0.63rem;
+    animation-delay: 0.8s;
+}
+.act3-title .show-anim {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-name: showAnim;
+}
+.act3-leaf1{
+    position: absolute;
+    left: 3rem;
+    bottom: 15rem;
+    z-index: 1;
+    animation-duration: 10s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    animation-name: act3leaf1;
+    transform-origin: center;
+}
+@keyframes act3leaf1 {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    20% {
+        transform: translate3d(0, 2rem, 0);
+        opacity: 1;
+    }
+    80% {
+        transform: translate3d(0, 8rem, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 10rem, 0);
+        opacity: 0;
+    }
+}
+.act3-leaf2{
+    position: absolute;
+    left: 5rem;
+    bottom: 16rem;
+    z-index: 1;
+    animation-delay: 1s;
+    animation-duration: 15s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    animation-name: act3leaf2;
+    transform-origin: center;
+}
+@keyframes act3leaf2 {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    20% {
+        transform: translate3d(0, 2rem, 0);
+        opacity: 1;
+    }
+    80% {
+        transform: translate3d(0, 8rem, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 10rem, 0);
+        opacity: 0;
+    }
+}
+@keyframes act3fadeIn {
+    from {
+        opacity: 0.2;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes act3fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes act3Drop {
+    0% {
+        transform: rotate(5deg) scale3d(1, 1, 1);
+    }
+    100%   {
+        transform: rotate(0deg) scale3d(0.01, 0.01, 0.01);
+    }
+}
+@keyframes act3Shake {
+    0% {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    20%  {
+        transform: rotate(10deg);
+        opacity: 1;
+    }
+
+    40%  {
+        transform: rotate(-10deg);
+        opacity: 1;
+    }
+    60%  {
+        transform: rotate(10deg);
+        opacity: 1;
+    }
+    80%  {
+        transform: rotate(-10deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+}

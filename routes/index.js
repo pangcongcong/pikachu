@@ -55,6 +55,9 @@ var storage = multer.diskStorage({
 function walk(path){
     var dirList = fs.readdirSync(path);
     dirList.forEach(function(item){
+        if(item == '__MACOSX'){
+            return
+        }
         if(fs.statSync(path + '/' + item).isDirectory()){
             walk(path + '/' + item);
         }else{
@@ -90,5 +93,5 @@ router.get('/worksInfo', function(req, res, next) {
 
 var upload = multer({ storage: storage }).single('resource');
 
-walk('public/works');
+// walk('public/works');
 module.exports = router;

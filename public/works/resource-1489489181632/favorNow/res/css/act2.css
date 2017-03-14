@@ -1,0 +1,252 @@
+.act2 {
+    display: none;
+}
+.act2-fadeout {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: fadeOut;
+}
+.act2-stage {
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    -webkit-transform: scale3d(3.34, 3.34, 2) translate3d(-0.24rem, -8.76rem, 0);
+    transform: scale3d(3.34, 3.34, 2) translate3d(-0.24rem, -3.76rem, 0);
+}
+.act2-show {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: show;
+}
+.act2-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 0;
+}
+.act2-bg-move {
+    animation-duration: 15s;
+    animation-fill-mode: both;
+    animation-name: move;
+}
+.act2-princess {
+    position: absolute;
+    z-index: 1;
+}
+.act2-princess>img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/*跳出前*/
+.act2-princess-before-jump {
+    display: none;
+    width: 0.33rem;
+    height: 0.54rem;
+    top: 6rem;
+    z-index: 3;
+}
+.act2-princess-show {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+    transform-origin: center bottom;
+    animation-timing-function: cubic-bezier(0.64, 0.1, 1, 0.61);
+}
+/*跳出后*/
+.act2-princess-after-jump {
+    display: none;
+    width: 0.54rem;
+    height: 0.76rem;
+    z-index: 3;
+}
+.act2-princess-jump {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: jump;
+    transform-origin: center bottom;
+}
+.act2-leaf {
+    position: absolute;
+    width: 1.95rem;
+    height: 1rem;
+    transform: translate3d(2.7rem, 6.5rem, 0) scale3d(1, 1, 1);
+    z-index: 4;
+}
+.act2-leaf-drop {
+    animation-duration: 8s;
+    animation-name: drop;
+    animation-direction: normal, normal;
+    animation-timing-function: linear, ease-in;
+}
+.act2-leaf>img {
+    width: 100%;
+    height: 100%;
+}
+.act2-leaf-shake {
+    animation-name: shake;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    transform-origin: 50% -100%;
+}
+.act2-title {
+    position: absolute;
+    z-index: 3;
+    left: 0.7rem;
+    top: 1.4rem;
+    width: 4.8rem;
+    height: 3.13rem;
+    display: none;
+}
+.act2-title>div{
+    opacity: 0;
+    background: url(https://s.wandougongzhu.cn/s/4f/title_2_b34018.png) no-repeat;
+    background-size: 4.39rem 2.46rem;
+}
+.act2-title>div:nth-of-type(1){
+    background-position: 0 0;
+    height: 0.37rem;
+    animation-delay: 0;
+}
+.act2-title>div:nth-of-type(2){
+    background-position: 0 -0.37rem;
+    height: 0.49rem;
+    animation-delay: 0.2s;
+}
+.act2-title>div:nth-of-type(3){
+    background-position: 0 -0.85rem;
+    height: 0.5rem;
+    animation-delay: 0.4s;
+}
+.act2-title>div:nth-of-type(4){
+    background-position: 0 -1.35rem;
+    height: 0.63rem;
+    animation-delay: 0.6s;
+}
+.act2-title>div:nth-of-type(5){
+    background-position: 0 -2rem;
+    height: 0.63rem;
+    animation-delay: 0.8s;
+}
+.act2-title .show-anim {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-name: showAnim;
+}
+@keyframes show {
+    from {
+        transform: scale3d(3.34, 3.34, 2) translate3d(-0.24rem, -3.76rem, 0);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+    }
+}
+@keyframes showAnim {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+@keyframes move {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-1.2rem, 0, 0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        transform: translate3d(2.75rem, 0, 0);
+    }
+    to {
+        transform: translate3d(3rem, 0, 0);
+    }
+}
+@keyframes jump {
+    from {
+        transform: translate3d(2.9rem, 6rem, 0) rotate(0);
+        opacity: 1;
+    }
+
+    10% {
+        transform: translate3d(2.95rem, 6.05rem, 0) rotate(0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translate3d(3rem, 6.08rem, 0) rotate(0deg);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translate3d(3.05rem, 6.1rem, 0) rotate(0deg);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translate3d(3.1rem, 6.12rem, 0) rotate(0deg);
+        opacity: 1;
+    }
+    60%, 73%, 80% {
+        transform: translate3d(3.3rem, 6.6rem, 0);
+        opacity: 0.75;
+    }
+
+    80%, 83% {
+        transform: translate3d(3.3rem, 6.5rem, 0);
+        opacity: 0.5;
+    }
+
+    90% {
+        transform: translate3d(3.3rem, 6.52rem, 0);
+        opacity: 0.5;
+    }
+
+    95% {
+        transform: translate3d(3.3rem, 6.58rem, 0);
+        opacity: 0.5;
+    }
+    to {
+        transform: translate3d(3.3rem, 6.6rem, 0);
+        opacity: 0.5;
+    }
+}
+@keyframes drop {
+    0%   {
+        transform: translate3d(2.7rem, 6.5rem, 0) scale3d(1, 1, 1);
+    }
+    100% {
+        transform: translate3d(2rem, 7rem, 0) scale3d(5, 5, 5);
+    }
+}
+@keyframes shake {
+    0%   {
+        transform: rotate(-10deg);
+    }
+    25%  {
+        transform: rotate(10deg);
+    }
+    50%  {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(10deg);
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}

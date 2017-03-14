@@ -1,0 +1,499 @@
+.act5 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 15;
+}
+.act5-anim{
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  transform-origin: center center;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+.act5-viewport{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	transform: translate(-100%, 0);
+	display: none;
+}
+.act5-viewport-show {
+	transform: translate(0, 0);
+	transition: all 1000ms 200ms linear;
+}
+.act5-wrap{
+	width: 12rem;
+	height: 200%;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -6rem;
+}
+.act5-wrap.act5-anim{
+	animation-delay: 7s;
+	animation-name: act5_wrap_anim;
+	animation-iteration-count: 1;
+	animation-fill-mode: both;
+	animation-duration: 3s;
+	animation-timing-function: ease;
+}
+@keyframes act5_wrap_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+    transform: translate(0,-50%);
+  }
+}
+.act5-moon{
+	width: 12rem;
+	height: 50%;
+	background-color: #fff;
+	/*background: url(https://s3.wandougongzhu.cn/s/82/moon3_528b33.jpg) center center no-repeat;*/
+	/*background-size: cover;*/
+}
+
+.act5-moon-img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	transition: all 10000ms;
+	transform: translate(-0.8rem, 6rem);
+}
+
+.act5-moon-img-show {
+	transform: translate(0, 0);
+}
+
+.act5-stage{
+	width: 12rem;
+	height: 50%;
+	background: url(https://s2.wandougongzhu.cn/s/b8/stage2_b02f47.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.act5-bell-box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	animation-duration: 20s;
+	animation-name: act5_bell_box_anim;
+}
+@keyframes act5_bell_box_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+    transform: translate(5rem,-2rem);
+  }
+}
+.act5-bell{
+	position: absolute;
+	left: 0.5rem;
+	top: 2rem;
+	animation-duration: 4s;
+	animation-name: act5_bell_anim;
+	animation-delay: 1s;
+}
+.act5-bell img{
+	width: 3.21rem;
+	height: 4.05rem;
+}
+@keyframes act5_bell_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  25% {
+  	transform: translate(0,-0.2rem);
+  }
+
+  75% {
+		transform: translate(0,0.2rem);
+  }
+
+  to {
+    transform: translate(0,0);
+  }
+}
+.act5-hand1{
+	position: absolute;
+	left: 4rem;
+	top: 4rem;
+	animation-duration: 3s;
+	animation-name: act5_hand_anim;
+	animation-direction: alternate-reverse;
+	animation-delay: 0.5s;
+}
+.act5-hand1 img{
+	width: 0.46rem;
+	height: 0.97rem;
+}
+@keyframes act5_hand_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  25% {
+  	transform: translate(0,-0.3rem);
+  }
+
+  75% {
+		transform: translate(0,0.3rem);
+  }
+
+  to {
+    transform: translate(0,0);
+  }
+}
+.act5-hand2{
+	position: absolute;
+	left: 5.4rem;
+	top: 3.2rem;
+	animation-duration: 3s;
+	animation-name: act5_hand_anim;
+}
+.act5-hand2 img{
+	width: 1.31rem;
+	height: 0.99rem;
+}
+.act5-dog{
+	position: absolute;
+	left: 6.4rem;
+	top: 9.3rem;
+	animation-duration: 20s;
+	animation-name: act5_dog_anim;
+}
+.act5-dog img{
+	width: 3.71rem;
+	height: 5.09rem;
+	animation-duration: 5s;
+	animation-name: act5_dog_img_anim;
+}
+@keyframes act5_dog_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+  	transform: translate(-2rem,1rem);
+  }
+}
+@keyframes act5_dog_img_anim {
+  from {
+    transform: translate(0,0);
+  }
+
+  25% {
+  	transform: translate(0,-0.3rem);
+  }
+
+  75% {
+		transform: translate(0,0.3rem);
+  }
+
+  to {
+    transform: translate(0,0);
+  }
+}
+
+.act5-car{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.act5-car.act5-anim{
+	animation-direction: normal;
+	animation-duration: 20s;
+	animation-name: act5_car_anim;
+}
+@keyframes act5_car_anim {
+  from {
+    transform: translate(-4.5rem,0.5rem) scale(1.1);
+    opacity: 0;
+  }
+  5%{
+		transform: translate(-4rem,0.45rem) scale(1.09);
+    opacity: 1;
+  }
+
+  50%{
+  	transform: translate(0,0) scale(1);	
+  	opacity: 1;
+  }
+
+  95%{
+  	transform: translate(4rem,-0.45rem) scale(0.95);	
+  	opacity: 1;
+  }
+
+  to {
+    transform: translate(4.5rem,-0.5rem) scale(0.9);
+    opacity: 0;
+  }
+}
+.act5-pumpkin{
+	position: absolute;
+	left: 1.7rem;
+	top: 5.9rem;
+}
+.act5-pumpkin img{
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	width: 7.33rem;
+	height: 3.07rem;
+}
+.act5-wheel1{
+	position: absolute;
+	z-index: 2;
+	left: 4.2rem;
+	top: 1.35rem;
+	background: url(https://s5.wandougongzhu.cn/s/20/wheel_6236d6.png) no-repeat;
+	background-size: 100% 100%;
+	width: 0.84rem;
+	height: 0.82rem;
+
+}
+.act5-wheel2{
+	position: absolute;
+	z-index: 2;
+	left: 1.55rem;
+	top: 2.18rem;
+	background: url(https://s2.wandougongzhu.cn/s/1e/wheel-2_eede17.png) no-repeat;
+	background-size: 100% 100%;
+	width: 0.82rem;
+	height: 0.82rem;
+
+}
+.act5-wheel1.act5-anim,
+.act5-wheel2.act5-anim{
+	animation-direction: normal;
+	animation-duration: 2s;
+	animation-name: act5_wheel_anim;
+}
+@keyframes act5_wheel_anim {
+  from {
+    transform: rotate(0);
+  }
+
+  50% {
+  	transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.act5-goat{
+	position: absolute;
+	z-index: 1;
+	top: -0.27rem;
+	left: 5.75rem;
+	width: 1.73rem;
+	height: 1.83rem;
+	background: url(https://s.wandougongzhu.cn/s/83/goat_edbeed.png) no-repeat;
+	background-size: 100% 100%;
+	
+	animation-direction: normal;
+	animation-duration: 4s;
+	animation-name: act5_goat_anim;
+}
+.act5-goat.act5-anim{
+	transform-origin: 1.37rem 0.5rem;
+}
+@keyframes act5_goat_anim {
+  from {
+    transform: rotate(0) translate(0,0);
+  }
+
+  25% {
+    transform: rotate(-7deg);
+  }
+
+  50% {
+    transform: rotate(0);
+  }
+
+  75% {
+    transform: rotate(7deg);
+  }
+
+  to {
+    transform: rotate(0);
+  }
+}
+
+.act5-couple{
+	position: absolute;
+	bottom: 5.36rem;
+	left: 4.85rem;
+	width: 2.3rem;
+	height: 3.2rem;
+}
+.act5-couple img{
+	display: block;
+	width: 2.3rem;
+	height: 3.2rem;
+}
+@keyframes act5_flash {
+    from,to,10%,90% {
+			opacity: 1;
+    }
+		50%{
+			opacity: 0.2;
+		}
+}
+
+.act5-flash {
+	animation-name: act5_flash;
+	animation-duration: 5s;
+	background: url(https://s2.wandougongzhu.cn/s/5c/flash_41808b.png) no-repeat;
+	background-size: 100% 100%;
+	width: 0.69rem;
+	height: 0.48rem;
+	position: absolute;
+	left: 0.6rem;
+	bottom: 0;
+}
+
+.act5-subtitle{
+	position: absolute;
+	z-index: 1;
+	left: 50%;
+	margin-left: -2.1rem;
+	bottom: 11.5rem;
+	width: 4.17rem;
+	height: 2.45rem;
+}
+.act5-subtitle>div{
+	opacity: 0;
+	background: url(https://s4.wandougongzhu.cn/s/e3/subtitle_300b55.png) no-repeat;
+	background-size: 4.17rem 2.45rem;
+
+	animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+
+  animation-name: act5_showAnim;
+}
+.act5-subtitle>div:nth-of-type(1){
+	background-position: 0 0;
+	height: 0.4rem;
+	animation-delay: 9s;
+}
+.act5-subtitle>div:nth-of-type(2){
+	background-position: 0 -0.4rem;
+	height: 0.4rem;
+	animation-delay: 9.2s;
+}
+.act5-subtitle>div:nth-of-type(3){
+	background-position: 0 -0.8rem;
+	height: 0.5rem;
+	animation-delay: 9.4s;
+}
+.act5-subtitle>div:nth-of-type(4){
+	background-position: 0 -1.3rem;
+	height: 0.6rem;
+	animation-delay: 9.6s;
+}
+.act5-subtitle>div:nth-of-type(5){
+	background-position: 0 -1.9rem;
+	height: 0.6rem;
+	animation-delay: 9.8s;
+}
+.act5-subtitle .show-anim{
+	
+}
+@keyframes act5_showAnim {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.act5-prince-dance-layer {
+	position: absolute;
+	left: 0.8rem;
+	top: -0.28rem;
+	width: 5.24rem;
+	height: 3.55rem;
+	overflow: hidden;
+}
+
+@keyframes dance-man {
+  0% {
+		transform: translateY(0);
+	}
+
+  10% {
+		transform: translateY(-100%);
+	}
+
+	20% {
+		transform: translateY(-200%);
+	}
+
+	30% {
+		transform: translateY(-300%);
+	}
+
+	40% {
+		transform: translateY(-400%);
+	}
+
+	50% {
+		transform: translateY(-500%);
+	}
+
+	60% {
+		transform: translateY(-600%);
+	}
+
+	70% {
+		transform: translateY(-700%);
+	}
+
+	80% {
+		transform: translateY(-800%);
+	}
+
+	90% {
+		transform: translateY(-900%);
+	}
+
+	100% {
+		transform: translateY(-1000%);
+	}
+}
+
+.dance-man {
+	animation: dance-man 8s steps(10) infinite;
+}
+
+.act5-prince-dance-layer img, .act5-princess-dance-layer img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: auto;
+}
+
+.act5-princess-dance-layer {
+	position: absolute;
+	left: -0.8rem;
+	top: -0.1rem;
+	width: 4.17rem;
+	height: 3.59rem;
+}
