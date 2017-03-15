@@ -34,8 +34,8 @@ router.get('/works', function(req, res) {
     var path = req.query.path
     res.render('works/' + path + '/index');
 });
-router.get('/error', function(req, res) {
-    res.render('error')
+router.get('/show', function(req, res) {
+    res.render('show')
 });
 //router.post('/upload', function (req, res) {
 //        console.log(111)
