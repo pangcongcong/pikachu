@@ -35,7 +35,7 @@ router.get('/works', function(req, res) {
     res.render('works/' + path + '/index');
 });
 router.get('/show', function(req, res) {
-    res.render('show', { title: 'Express' })
+    res.render('show')
 });
 //router.post('/upload', function (req, res) {
 //        console.log(111)
