@@ -73,6 +73,9 @@ nav ul li a {
     color: #333;
   text-decoration: none;
 }
+.author:hover {
+    text-decoration: underline;
+}
 .logo{
   width: 200px;
   height: 200px;
@@ -86,7 +89,7 @@ nav ul li a {
   z-index: 1;
     line-height: 30px;
   background-image: none !important;
-  background: rgba(20,32,38,.5);
+  background: rgba(20,32,38,.9);
 }
 .logo a {
     margin: 50px auto;
