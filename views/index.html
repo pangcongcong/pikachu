@@ -70,9 +70,10 @@
                     $(".con-box").append($(".demo-exp").eq(0).clone().removeClass("hidden"));
 
                     var $curDemo = $(".demo-exp").eq(parseInt(k)+1);
+                    var param =  pageArr[k] + '/index.html'
 
                     $curDemo.find(".logo").css("background-image", "url(" + dataArrK.logo +")");
-                    $curDemo.find(".logo a").attr("href", '.' + pageArr[k] + '/index.html');
+                    $curDemo.find(".logo a").attr("href", './show?path=.' + param);
                     $curDemo.find(".name").html(dataArrK.name);
                     $curDemo.find(".desc").html(dataArrK.description);
                     $curDemo.find(".author").html(dataArrK.author + '-' + dataArrK.name);
