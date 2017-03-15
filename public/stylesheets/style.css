@@ -82,6 +82,7 @@ nav ul li a {
 }
 .logo:hover {
   z-index: 1;
+    line-height: 30px;
   background-image: none !important;
   background: rgba(20,32,38,.9);
 }
