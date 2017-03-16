@@ -21,8 +21,11 @@
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
     }
-    #code {
+    .code-box {
         margin: 20% auto 20% 0;
+    }
+    #code {
+        margin: 20px 0;
     }
 </style>
 <body>
@@ -30,7 +33,10 @@
     <div class="phone">
         <iframe style="width: 375px;height: 667px" src="<%=url%>" frameborder="0"></iframe>
     </div>
-    <div id="code"></div>
+    <div class="code-box">
+        <div>扫码手机预览&nbsp;[]~(￣▽￣)~*</div>
+        <div id="code"></div>
+    </div>
 </div>
 
 <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
