@@ -70,8 +70,12 @@ nav ul li a {
   margin: 5px 5px 30px 5px;
 }
 .author {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
     color: #333;
-  text-decoration: none;
+    text-decoration: none;
 }
 .author:hover {
     text-decoration: underline;

@@ -77,7 +77,7 @@
                     $curDemo.find(".name").html(dataArrK.name);
                     $curDemo.find(".desc").html(dataArrK.description);
                     $curDemo.find(".author").html(dataArrK.author + '-' + dataArrK.name);
-                    $curDemo.find(".author").attr("href", '.' + pageArr[k] + '/index.html');
+                    $curDemo.find(".author").attr("href", './show?path=.' + param);
                     $curDemo.find("a.download").attr("href", "./upload/" + downFile + ".zip");
                 }
                 $(".logo").hover(function () {
