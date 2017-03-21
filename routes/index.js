@@ -36,7 +36,8 @@ router.get('/works', function(req, res) {
 });
 router.get('/show', function(req, res) {
     var path = req.query.path?req.query.path:""
-    res.render('show', { url: path })
+    var onlineUrl = req.query.path?req.query.onlineUrl:""
+    res.render('show', { url: path ,onlineUrl:onlineUrl})
 });
 //router.post('/upload', function (req, res) {
 //        console.log(111)
