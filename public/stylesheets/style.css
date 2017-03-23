@@ -160,3 +160,16 @@ a {
     width: 600px;
     height: auto;
 }
+.add {
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    width: 90px;
+    height: 40px;
+    background: rgba(20,32,38,.8);
+    float: right;
+}

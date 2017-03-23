@@ -8,6 +8,10 @@
 <body>
 <div class="tips">上传格式</div>
 <img class="tips-img hidden" src="https://s.wandougongzhu.cn/s/df/98155c0e-bdc9-41fe-b09c-7b3d3efffc6a_65af53.png">
+<a href="./add">
+    <div class="add">上传作品</div>
+</a>
+
 <header>
     <div class="container">
         <div class="title">WFX Works</div>
@@ -73,8 +77,7 @@
                     var param =  pageArr[k] + '/index.html'
 
                     $curDemo.find(".logo").css("background-image", "url(" + dataArrK.logo +")");
-                    var online = dataArrK.url ? dataArrK.url:"";
-                    $curDemo.find(".logo a").attr("href", './show?path=.' + param +"&onlineUrl="+online );
+                    $curDemo.find(".logo a").attr("href", './show?path=.' + param);
                     $curDemo.find(".name").html(dataArrK.name);
                     $curDemo.find(".desc").html(dataArrK.description);
                     $curDemo.find(".author").html(dataArrK.author + '-' + dataArrK.name);

@@ -21,16 +21,12 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single('resource');
 
-
-//var upload = multer({dest:"public/upload"}).single('resource');
 //  解压到views/works
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
 router.get('/works', function(req, res) {
-//    var path = req.query.path;
     var path = req.query.path
     res.render('works/' + path + '/index');
 });
@@ -38,6 +34,10 @@ router.get('/show', function(req, res) {
     var path = req.query.path?req.query.path:""
     var onlineUrl = req.query.path?req.query.onlineUrl:""
     res.render('show', { url: path ,onlineUrl:onlineUrl})
+});
+//上传作品页面
+router.get('/add', function(req, res) {
+    res.render('add')
 });
 //router.post('/upload', function (req, res) {
 //        console.log(111)
@@ -58,7 +58,6 @@ router.get('/show', function(req, res) {
 
 router.post('/upload', upload,function (req, res) {
 //    upload(req, res, function (err) {
-        console.log(222)
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
