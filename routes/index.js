@@ -32,7 +32,7 @@ router.get('/works', function(req, res) {
 });
 router.get('/show', function(req, res) {
     var path = req.query.path?req.query.path:""
-    var onlineUrl = req.query.path?req.query.onlineUrl:""
+    var onlineUrl = req.query.onlineUrl?req.query.onlineUrl:""
     res.render('show', { url: path ,onlineUrl:onlineUrl})
 });
 //上传作品页面
