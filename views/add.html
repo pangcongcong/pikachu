@@ -6,13 +6,91 @@
 </head>
 <style>
     .container {
-        width: 10rem;
-        margin: 15px 0;
+        width: 80%;
+        margin: 15px auto;
+    }
+    .add-form {
+        margin: 0 auto;
+    }
+    .add-form div {
+        position: relative;
+    }
+    .add-form label {
+        text-align: right;
+        width: 30%;
+        margin-right: 5%;
+        display: inline-block;
+        position: absolute;
+        top: 8px;
+        left: 0;
+    }
+    label {
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-right {
+        width: 60%;
+        display: inline-block;
+        margin-left: 35%;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px #ccc solid;
+    }
+    .form-line {
+        margin: 20px 0;
+    }
+    button {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50% ,-50%);
+        padding: 6px 14px;
+        min-width: 100px;
+        background: #333;
+        color: #d0d0d0;
+        font-size: 14px;
+        border: none;
+        border-radius: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
     }
 </style>
 <body>
     <div class="container">
-        <div>姓名</div>
+        <form action="./upload" method="post" class="add-form" enctype="multipart/form-data">
+            <div>注：项目结构为，首页为index.html</div>
+            <div class="form-line">
+                <label for="title">作品名称（*）</label>
+                <input type="text" placeholder="必填项" name="title" id="title" class="form-right">
+            </div>
+            <div class="form-line">
+                <label for="author">作者（*）</label>
+                <input type="text" placeholder="必填项" name="title" id="author" class="form-right">
+            </div>
+            <div class="form-line">
+                <label for="desc">项目描述（*）</label>
+                <input type="text" placeholder="必填项" name="title" id="desc" class="form-right">
+            </div>
+            <div class="form-line">
+                <label for="logo">logo地址（*）</label>
+                <input type="text" placeholder="必填项" name="title" id="logo" class="form-right">
+            </div>
+            <div class="form-line">
+                <label for="onlineUrl">线上预览地址（*）</label>
+                <input type="text" placeholder="必填项" name="title" id="onlineUrl" class="form-right">
+            </div>
+            <div class="form-line">
+                <label for="resource">选择上传文件(.zip)</label>
+                <div class="form-right" style="border:none;">
+                    <input type="file" id="resource" name="resource">
+                    <div class="flie-upload"></div>
+                </div>
+            </div>
+            <button type="submit">上传</button>
+        </form>
     </div>
 </body>
 </html>

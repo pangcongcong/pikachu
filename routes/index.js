@@ -37,7 +37,7 @@ router.get('/show', function(req, res) {
 });
 //上传作品页面
 router.get('/add', function(req, res) {
-    res.render('add')
+    res.render('add');
 });
 //router.post('/upload', function (req, res) {
 //        console.log(111)
@@ -61,13 +61,38 @@ router.post('/upload', upload,function (req, res) {
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-        console.log(fileFormat)
+        console.log(req.file);
+//        mkdirSync('public/works/' + fileFormat[0], 0, function (e) {
+//            if (e) {
+//                console.log("出错啦");
+//            } else {
+//                console.log("创建成功");
+//            }
+//        })
 //    })
     res.send('success');
 })
 router.post('/download', function (req, res, next) {
     res.download(req.file.path);
 })
+
+router.get('/worksInfo', function(req, res, next) {
+    pageList = [];
+    fileList = [];
+    walk('public/works')
+    var data = {};
+    var data_arr = [];
+    var page_arr = [];
+    fileList.forEach(function(item) {
+        var content = fs.readFileSync(item,'utf-8');
+        data_arr.push(content);
+    });
+    page_arr.push(pageList);
+
+    data.data_arr = data_arr;
+    data.page_arr = page_arr;
+    res.send(data);
+});
 
 function walk(path){
     var dirList = fs.readdirSync(path);
@@ -89,24 +114,28 @@ function walk(path){
         }
     });
 }
+//来自司徒大神的mkdirp的封装
+function mkdirSync(url,mode,cb){
+    var arr = url.split("/");
+    mode = mode || 0755;
+    cb = cb || function(){};
+    if(arr[0]==="."){//处理 ./aaa
+        arr.shift();
+    }
+    if(arr[0] == ".."){//处理 ../ddd/d
+        arr.splice(0,2,arr[0]+"/"+arr[1])
+    }
+    function inner(cur){
+        if(!file_path.existsSync(cur)){//不存在就创建一个
+            fs.mkdirSync(cur, mode)
+        }
+        if(arr.length){
+            inner(cur + "/"+arr.shift());
+        }else{
+            cb();
+        }
+    }
+    arr.length && inner(arr.shift());
+}
 
-router.get('/worksInfo', function(req, res, next) {
-    pageList = [];
-    fileList = [];
-    walk('public/works')
-    var data = {};
-    var data_arr = [];
-    var page_arr = [];
-    fileList.forEach(function(item) {
-        var content = fs.readFileSync(item,'utf-8');
-        data_arr.push(content);
-    });
-    page_arr.push(pageList);
-
-    data.data_arr = data_arr;
-    data.page_arr = page_arr;
-    res.send(data);
-});
-
-// walk('public/works');
 module.exports = router;
