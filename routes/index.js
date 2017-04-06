@@ -61,7 +61,6 @@ router.post('/upload', upload,function (req, res) {
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-        console.log(req.file);
 //        mkdirSync('public/works/' + fileFormat[0], 0, function (e) {
 //            if (e) {
 //                console.log("出错啦");
@@ -102,8 +101,7 @@ function walk(path){
         }
         if(fs.statSync(path + '/' + item).isDirectory()){
             walk(path + '/' + item);
-        }else{
-//            console.log("item:" + path + '/' + item)
+        } else {
             if (file_path.basename(path + '/' + item) == 'index.html'){
                 pageList.push(file_path.dirname(path + '/' + item).replace('public', ''));
             }
@@ -114,6 +112,43 @@ function walk(path){
         }
     });
 }
+
+function uploadcheck (path) {
+    var dirList = fs.readdirSync(path);
+    dirList.forEach(function(item){
+        if(item == '__MACOSX'){
+            return
+        }
+        if(fs.statSync(path + '/' + item).isDirectory()){
+            walk(path + '/' + item);
+        }else{
+            if (file_path.extname(path + '/' + item) == '.json') {
+                //写入json文件
+                file_path.open(path + '/' + item)
+            } else {
+                //创建json文件
+                var object = {
+                    "author": "lpk",
+                    "name": "favorNow",
+                    "description": "场景动画新高度",
+                    "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
+                    "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
+                }
+                mkdirSync(path + '/package.json', 0, function (e) {
+                    if (e) {
+                        console.log("出错啦");
+                    } else {
+                        console.log("创建成功");
+                        file_path.writeFile( path + '/package.json', JSON.stringify(object), 'utf8');
+                    }
+                })
+            }
+            return
+        }
+    });
+
+}
+
 //来自司徒大神的mkdirp的封装
 function mkdirSync(url,mode,cb){
     var arr = url.split("/");
