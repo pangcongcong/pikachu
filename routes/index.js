@@ -39,37 +39,11 @@ router.get('/show', function(req, res) {
 router.get('/add', function(req, res) {
     res.render('add');
 });
-//router.post('/upload', function (req, res) {
-//        console.log(111)
-//    upload(req, res, function (err) {
-//        console.log(222)
-//        var unzip = new adm_zip(req.file.path);
-//        var fileFormat =(req.file.filename).split(".");
-//        unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-//        console.log(fileFormat)
-//        if (err) {
-//            console.log(req.body);   //打印请求体
-//            console.log(req.file);
-//            return
-//        }
-//    })
-//    res.send('success');
-//})
-
 router.post('/upload', upload,function (req, res) {
-//    upload(req, res, function (err) {
-        var unzip = new adm_zip(req.file.path);
-        var fileFormat =(req.file.filename).split(".");
-        unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-        uploadcheck('public/works/' + fileFormat[0]);
-//        mkdirSync('public/works/' + fileFormat[0], 0, function (e) {
-//            if (e) {
-//                console.log("出错啦");
-//            } else {
-//                console.log("创建成功");
-//            }
-//        })
-//    })
+    var unzip = new adm_zip(req.file.path);
+    var fileFormat =(req.file.filename).split(".");
+    unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
+    uploadcheck('public/works/' + fileFormat[0]);
     res.send('success');
 })
 router.post('/download', function (req, res, next) {
@@ -115,7 +89,6 @@ function walk(path){
 }
 
 function uploadcheck (path) {
-    console.log("111");
     var dirList = fs.readdirSync(path);
     var object = {
         "author": "lpk",
@@ -129,22 +102,19 @@ function uploadcheck (path) {
             return
         }
         if (fs.statSync(path + '/' + item).isDirectory()) {
-            walk(path + '/' + item);
+            uploadcheck(path + '/' + item);
         } else {
-            if (file_path.extname(path + '/' + item) == '.json') {
-                file_path.open(path + '/' + item);
-                file_path.writeFile( path + '/' + item , JSON.stringify(object), 'utf8');
-            } else {
-                console.log(path + '/' + item);
-                mkdirSync(path + '/package.json', 0, function (e) {
-                    if (e) {
-                        console.log("出错啦");
-                    } else {
-                        file_path.writeFile( path + '/package.json', JSON.stringify(object), 'utf8');
-                        console.log("创建成功");
-                    }
-                })
-            }
+            fs.open(path + '/package.json', 'w+', function (e) {
+                if (e) {
+                    console.log("出错啦");
+                } else {
+                    fs.writeFile( path + '/package.json', JSON.stringify(object), function (err) {
+                        if(err)
+                            return console.error(err);
+                    });
+                    console.log("创建成功");
+                }
+            })
             return
         }
     });
