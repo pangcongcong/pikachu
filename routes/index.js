@@ -43,7 +43,7 @@ router.post('/upload', upload,function (req, res) {
     var unzip = new adm_zip(req.file.path);
     var fileFormat =(req.file.filename).split(".");
     unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-    uploadcheck('public/works/' + fileFormat[0]);
+    uploadcheck('public/works/' + fileFormat[0],req.body);
     res.send('success');
 })
 router.post('/download', function (req, res, next) {
@@ -88,21 +88,21 @@ function walk(path){
     });
 }
 
-function uploadcheck (path) {
+function uploadcheck (path,object) {
     var dirList = fs.readdirSync(path);
-    var object = {
-        "author": "lpk",
-        "name": "favorNow",
-        "description": "场景动画新高度",
-        "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
-        "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
-    }
+    // var object = {
+    //     "author": "lpk",
+    //     "name": "favorNow",
+    //     "description": "场景动画新高度",
+    //     "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
+    //     "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
+    // }
     dirList.forEach(function(item){
         if(item == '__MACOSX'){
             return
         }
         if (fs.statSync(path + '/' + item).isDirectory()) {
-            uploadcheck(path + '/' + item);
+            uploadcheck(path + '/' + item,object);
         } else {
             fs.open(path + '/package.json', 'w+', function (e) {
                 if (e) {
