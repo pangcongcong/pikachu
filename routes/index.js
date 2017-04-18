@@ -61,6 +61,7 @@ router.post('/upload', upload,function (req, res) {
         var unzip = new adm_zip(req.file.path);
         var fileFormat =(req.file.filename).split(".");
         unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
+        uploadcheck('public/works/' + fileFormat[0]);
 //        mkdirSync('public/works/' + fileFormat[0], 0, function (e) {
 //            if (e) {
 //                console.log("出错啦");
@@ -114,32 +115,33 @@ function walk(path){
 }
 
 function uploadcheck (path) {
+    console.log("111");
     var dirList = fs.readdirSync(path);
+    var object = {
+        "author": "lpk",
+        "name": "favorNow",
+        "description": "场景动画新高度",
+        "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
+        "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
+    }
     dirList.forEach(function(item){
         if(item == '__MACOSX'){
             return
         }
-        if(fs.statSync(path + '/' + item).isDirectory()){
+        if (fs.statSync(path + '/' + item).isDirectory()) {
             walk(path + '/' + item);
-        }else{
+        } else {
             if (file_path.extname(path + '/' + item) == '.json') {
-                //写入json文件
-                file_path.open(path + '/' + item)
+                file_path.open(path + '/' + item);
+                file_path.writeFile( path + '/' + item , JSON.stringify(object), 'utf8');
             } else {
-                //创建json文件
-                var object = {
-                    "author": "lpk",
-                    "name": "favorNow",
-                    "description": "场景动画新高度",
-                    "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
-                    "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
-                }
+                console.log(path + '/' + item);
                 mkdirSync(path + '/package.json', 0, function (e) {
                     if (e) {
                         console.log("出错啦");
                     } else {
-                        console.log("创建成功");
                         file_path.writeFile( path + '/package.json', JSON.stringify(object), 'utf8');
+                        console.log("创建成功");
                     }
                 })
             }
@@ -162,7 +164,7 @@ function mkdirSync(url,mode,cb){
     }
     function inner(cur){
         if(!file_path.existsSync(cur)){//不存在就创建一个
-            fs.mkdirSync(cur, mode)
+            fs.mkdirSync(cur, mode);
         }
         if(arr.length){
             inner(cur + "/"+arr.shift());
