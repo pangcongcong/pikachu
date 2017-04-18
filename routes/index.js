@@ -57,26 +57,10 @@ router.get('/add', function(req, res) {
 //})
 
 router.post('/upload', upload,function (req, res) {
-<<<<<<< HEAD
     var unzip = new adm_zip(req.file.path);
     var fileFormat =(req.file.filename).split(".");
     unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-    uploadcheck('public/works/' + fileFormat[0],req.body);
-=======
-//    upload(req, res, function (err) {
-        var unzip = new adm_zip(req.file.path);
-        var fileFormat =(req.file.filename).split(".");
-        unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
-        uploadcheck('public/works/' + fileFormat[0]);
-//        mkdirSync('public/works/' + fileFormat[0], 0, function (e) {
-//            if (e) {
-//                console.log("出错啦");
-//            } else {
-//                console.log("创建成功");
-//            }
-//        })
-//    })
->>>>>>> parent of 07ae908... fixed
+    uploadcheck('public/works/' + fileFormat[0], req.body);
     res.send('success');
 })
 router.post('/download', function (req, res, next) {
@@ -121,41 +105,36 @@ function walk(path){
     });
 }
 
-<<<<<<< HEAD
-function uploadcheck (path,object) {
-=======
-function uploadcheck (path) {
-    console.log("111");
->>>>>>> parent of 07ae908... fixed
+function uploadcheck (path, obj) {
+
     var dirList = fs.readdirSync(path);
-    // var object = {
-    //     "author": "lpk",
-    //     "name": "favorNow",
-    //     "description": "场景动画新高度",
-    //     "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
-    //     "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
-    // }
+//    var object = {
+//        "author": "lpk",
+//        "name": "favorNow",
+//        "description": "场景动画新高度",
+//        "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
+//        "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
+//    }
     dirList.forEach(function(item){
         if(item == '__MACOSX'){
             return
         }
         if (fs.statSync(path + '/' + item).isDirectory()) {
-<<<<<<< HEAD
-            uploadcheck(path + '/' + item,object);
-=======
-            walk(path + '/' + item);
->>>>>>> parent of 07ae908... fixed
+            uploadcheck(path + '/' + item, obj);
         } else {
             if (file_path.extname(path + '/' + item) == '.json') {
                 file_path.open(path + '/' + item);
-                file_path.writeFile( path + '/' + item , JSON.stringify(object), 'utf8');
+                file_path.writeFile( path + '/' + item , JSON.stringify(obj), 'utf8');
             } else {
-                console.log(path + '/' + item);
-                mkdirSync(path + '/package.json', 0, function (e) {
+                fs.open(path + '/package.json', 'w+', function (e) {
                     if (e) {
                         console.log("出错啦");
                     } else {
-                        file_path.writeFile( path + '/package.json', JSON.stringify(object), 'utf8');
+                        fs.writeFile( path + '/package.json', JSON.stringify(obj), function (err) {
+                            if (err) {
+                                return console.error(err);
+                            }
+                        });
                         console.log("创建成功");
                     }
                 })
