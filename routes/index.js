@@ -61,7 +61,7 @@ router.post('/upload', upload,function (req, res) {
     var fileFormat =(req.file.filename).split(".");
     unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
     uploadcheck('public/works/' + fileFormat[0], req.body);
-    res.send('success');
+    res.redirect('/');
 })
 router.post('/download', function (req, res, next) {
     res.download(req.file.path);
@@ -108,24 +108,15 @@ function walk(path){
 function uploadcheck (path, obj) {
 
     var dirList = fs.readdirSync(path);
-//    var object = {
-//        "author": "lpk",
-//        "name": "favorNow",
-//        "description": "场景动画新高度",
-//        "logo": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg",
-//        "url": "https://s4.wandougongzhu.cn/s/cb/logo_fbd468.jpg"
-//    }
     dirList.forEach(function(item){
         if(item == '__MACOSX'){
             return
         }
-        if (fs.statSync(path + '/' + item).isDirectory()) {
-            uploadcheck(path + '/' + item, obj);
-        } else {
-            if (file_path.extname(path + '/' + item) == '.json') {
-                file_path.open(path + '/' + item);
-                file_path.writeFile( path + '/' + item , JSON.stringify(obj), 'utf8');
-            } else {
+        if (fs.statSync(path + '/' + item).isFile()) {
+            if (file_path.extname(path + '/' + item) == '.json'){
+                fs.unlinkSync(path + '/' + item);
+            }
+            if (file_path.basename(path + '/' + item) == 'index.html'){
                 fs.open(path + '/package.json', 'w+', function (e) {
                     if (e) {
                         console.log("出错啦");
@@ -140,7 +131,20 @@ function uploadcheck (path, obj) {
                 })
             }
             return
+        } else {
+            uploadcheck(path + '/' + item, obj);
         }
+//        if (fs.statSync(path + '/' + item).isDirectory()) {
+//
+//        } else {
+//            if (file_path.extname(path + '/' + item) == '.json') {
+//                file_path.open(path + '/' + item);
+//                file_path.writeFile( path + '/' + item , JSON.stringify(obj), 'utf8');
+//            } else {
+//
+//            }
+//            return
+//        }
     });
 
 }

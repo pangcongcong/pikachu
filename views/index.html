@@ -15,7 +15,7 @@
 <header>
     <div class="container">
         <div class="title">WFX Works</div>
-        <div class="desc">豌豆公主前端作品库</div>
+        <div class="description">豌豆公主前端作品库</div>
     </div>
 </header>
 <nav>
@@ -30,14 +30,14 @@
     <div class="cut-off container"></div>
 </nav>
 <div class="container con-box">
-    <div class="demo">
-        <form action="./upload" method="post" enctype="multipart/form-data">
-            <label for="resource">点击上传文件</label>
-            <input type="file" id="resource" name="resource">
-            <div class="flie-upload"></div>
-            <button type="submit">上传</button>
-        </form>
-    </div>
+    <!--<div class="demo">-->
+        <!--<form action="./upload" method="post" enctype="multipart/form-data">-->
+            <!--<label for="resource">点击上传文件</label>-->
+            <!--<input type="file" id="resource" name="resource">-->
+            <!--<div class="flie-upload"></div>-->
+            <!--<button type="submit">上传</button>-->
+        <!--</form>-->
+    <!--</div>-->
     <!--<a href="/download/kkk">下载文件</a>-->
     <div class="demo demo-exp hidden">
         <div class="logo">
@@ -65,6 +65,8 @@
             success:function(data){
                 var pageArr = data.page_arr.toString().split(',')
                 var dataArr = data.data_arr;
+                console.log(pageArr);
+                console.log(dataArr);
 
                 for (var k in data.data_arr) {
                     var exp = /^resource-.*[0-9]/
