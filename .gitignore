@@ -38,3 +38,6 @@ jspm_packages
 .node_repl_history
 public/images/
 public/javascripts/
+
+public/upload/
+public/works/

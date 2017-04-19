@@ -62,6 +62,12 @@ router.post('/upload', upload,function (req, res) {
     unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);
     uploadcheck('public/works/' + fileFormat[0], req.body);
     res.redirect('/');
+    // var result = uploadcheck_new('public/works/' + fileFormat[0], req.body);
+    // console.log("结果："+result);
+    // if(result)
+    //     res.send('success');
+    // else
+    //     res.send('error');
 })
 router.post('/download', function (req, res, next) {
     res.download(req.file.path);
@@ -148,6 +154,70 @@ function uploadcheck (path, obj) {
     });
 
 }
+function uploadcheck_new (path, obj) {
+
+    var dirList = fs.readdirSync(path);
+    var pathArr = [];
+    var jsonDirPath = ''
+    var isFirst = true
+    var check =function (item){
+        console.log(item)
+        if(item == '__MACOSX' || item == '.DS_Store'){
+            return
+        }
+        if (fs.statSync(path + '/' + item).isDirectory() && isFirst) {
+            var _Arr= fs.readdirSync(path + '/' + item)
+            for(_item in _Arr)
+                pathArr.push( item + '/' + _Arr[_item])
+        } else {
+            if (file_path.extname(path + '/' + item) == '.json') {
+                jsonDirPath = path + '/' + item
+            } else if(item.split('/')[1] == 'index.html'){
+                jsonDirPath = path + '/' +item.split('/')[0]+ '/' + 'package.json'
+            }
+        }
+    }
+    try{
+        dirList.forEach(check);
+        if(!jsonDirPath){
+            isFirst = false
+            pathArr.forEach(check);
+        }
+        if(jsonDirPath){
+            return handleFile(jsonDirPath,obj)
+        }else{
+            return false
+        }
+    }catch(e){
+        console.log(e)
+    }
+}
+
+function handleFile(path,obj){
+    try{
+        if(!fs.existsSync(path)){
+            if(!fs.openSync(path, 'w+')){
+                return false
+            }
+        }
+    }catch(e){
+        console.log(e)
+        return false
+    }
+    
+    return writeFile(path,obj)
+}
+
+function writeFile(path,obj){
+    try{
+        fs.writeFileSync(path, JSON.stringify(obj));
+        return true
+    }catch(e){
+        console.log(e)
+        return false
+    }
+}
+
 
 //来自司徒大神的mkdirp的封装
 function mkdirSync(url,mode,cb){
