@@ -1,11 +1,11 @@
 [{
     "name":"pikachu",
-    "host": "123.56.166.195 ",
+    "host": "123.56.166.195",
     "port": 22,
     "username": "pangjingcong",
     "password": "pangjingcong@wandou",
     "remotePath": "/home/pangjingcong/pikachu",
-    "localPath": "/Users/pangjingcong/pikachu",
+    "localPath": "/Users/pangjingcong/myapp/pikachu",
     "disable": false,
     "private_key": "~/.ssh/id_rsa"
 },{
