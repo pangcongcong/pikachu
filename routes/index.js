@@ -161,7 +161,7 @@ function uploadcheck_new (path, obj) {
     var jsonDirPath = ''
     var isFirst = true
     var check =function (item){
-        console.log(item)
+        //console.log(item)
         if(item == '__MACOSX' || item == '.DS_Store'){
             return
         }
