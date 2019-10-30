@@ -37,6 +37,7 @@ router.get('/show', function(req, res) {
 });
 //上传作品页面
 router.get('/add', function(req, res) {
+    console.log('test ggg');
     res.render('add');
 });
 //router.post('/upload', function (req, res) {
@@ -57,6 +58,7 @@ router.get('/add', function(req, res) {
 //})
 
 router.post('/upload', upload,function (req, res) {
+    console.log('start upload');
     var unzip = new adm_zip(req.file.path);
     var fileFormat =(req.file.filename).split(".");
     unzip.extractAllTo('public/works/' + fileFormat[0], /*overwrite*/false);

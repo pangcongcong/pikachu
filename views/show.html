@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>页面效果展示</title>
 </head>
+<link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <style>
     .box {
         display: flex;
         flex-direction: row;
     }
     .phone {
-        margin: 0 auto;
+        margin: 0 50px;
         position: relative;
         background: #111;
         border-radius: 55px;
@@ -27,19 +28,37 @@
     #code {
         margin: 20px 0;
     }
+    .hidden{
+        display: none;
+    }
 </style>
 <body>
 <div class="box">
     <div class="phone">
         <iframe style="width: 375px;height: 667px" src="<%=url%>" frameborder="0"></iframe>
     </div>
-    <div class="code-box">
-        <div>扫码手机预览&nbsp;[]~(￣▽￣)~*</div>
-        <div id="code"></div>
-         <% if (onlineUrl.length > 0) { %>
-        <div id="online"><a href="<%=onlineUrl%>">线上地址</a></div>
-         <% } %>
+    <div>
+        <button class="btn btn-info view-sourcecode">查看源代码</button>
+        <div class="code-box">
+            <div>扫码手机预览&nbsp;[]~(￣▽￣)~*</div>
+            <div id="code"></div>
+             <% if (onlineUrl.length > 0) { %>
+            <div id="online"><a href="<%=onlineUrl%>"> </a></div>
+             <% } %>
+        </div>
+        <div class="sourcecode-box hidden">
+            <code class="html-code">
+                <div>html</div>
+            </code>
+            <code class="css-code">
+                <div>css</div>
+            </code>
+            <code class="js-code">
+                <div>js</div>
+            </code>
+        </div> 
     </div>
+    
 </div>
 
 <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
@@ -48,6 +67,16 @@
     var url = '<%=url%>'.substring(1,'<%=url%>'.length)
     console.log("http://pikachu.wfxteam.com/" + url);
     $('#code').qrcode("http://pikachu.wfxteam.com/" + url); //任意字符串
+
+    $('.view-sourcecode').on('click', function() {
+        if ($('.code-box').hasClass('hidden')) {
+            $('.code-box').removeClass('hidden');
+            $('.sourcecode-box').addClass('hidden');
+        } else {
+            $('.code-box').addClass('hidden');
+            $('.sourcecode-box').removeClass('hidden');
+        }
+    })
 </script>
 </body>
 </html>

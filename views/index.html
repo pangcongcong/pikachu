@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./stylesheets/style.css">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <title>wandouer_works</title>
 </head>
 <body>
 <!--<div class="tips">上传格式</div>-->
 <!--<img class="tips-img hidden" src="https://s.wandougongzhu.cn/s/df/98155c0e-bdc9-41fe-b09c-7b3d3efffc6a_65af53.png">-->
 <a href="./add">
-    <div class="add">上传作品</div>
+    <div class="add btn btn-success">上传作品</div>
 </a>
 
-<header>
-    <div class="container">
+<header style="margin: 20px auto;">
+    <div class="container-title">
         <div class="title">WFX Works</div>
         <div class="description">豌豆公主前端作品库</div>
     </div>
 </header>
-<nav>
+<!-- <nav>
     <div class="cut-off container">
     </div>
     <ul>
@@ -28,7 +29,7 @@
         <li><a href="">其他</a></li>
     </ul>
     <div class="cut-off container"></div>
-</nav>
+</nav> -->
 <div class="container con-box">
     <!--<div class="demo">-->
         <!--<form action="./upload" method="post" enctype="multipart/form-data">-->
@@ -56,6 +57,7 @@
 </div>
 
 <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function(){
         $.ajax({
